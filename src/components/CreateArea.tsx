@@ -14,7 +14,7 @@ interface CreateAreaProps {
 }
 
 const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
-  const [isExpended, SetExpended] = useState(false);
+  const [isExpanded, SetExpended] = useState(false);
   const [note, setNote] = useState({
     title: "",
     content: "",
@@ -23,8 +23,7 @@ const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
   function handleChange(event: any) {
     const { name, value } = event.target;
 
-    setNote((prevNote) => { 
-      
+    setNote((prevNote) => {
       return {
         ...prevNote,
         [name]: value,
@@ -41,8 +40,8 @@ const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
     event.preventDefault();
   }
 
-  function expand(){
-
+  function expand() {
+    // console.log("hh");
   }
 
   return (
@@ -55,21 +54,22 @@ const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
           value={note.title}
           placeholder="Title"
         />
-        
-          <div>
-            <textarea
-              name="content"
-              onChange={handleChange}
-              value={note.content}
-              placeholder="Take a note..."
-              rows={3}
-            />
-<Zoom in={isExpended}></Zoom>
+
+        <div>
+          <textarea
+            name="content"
+            onChange={handleChange}
+            value={note.content}
+            placeholder="Take a note..."
+            rows={3}
+          />
+          <Zoom in={isExpanded}>
             <Fab color="primary" aria-label="add" onClick={submitNote}>
               <AddIcon />
             </Fab>
-          </div>
-        </Zoom>
+          </Zoom>
+        </div>
+
         {/* <button onClick={submitNote}>
           <AddIcon fontSize="large" />
         </button> */}
