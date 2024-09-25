@@ -23,7 +23,8 @@ const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
   function handleChange(event: any) {
     const { name, value } = event.target;
 
-    setNote((prevNote) => {
+    setNote((prevNote) => { 
+      
       return {
         ...prevNote,
         [name]: value,
