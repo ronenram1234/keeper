@@ -14,7 +14,8 @@ interface CreateAreaProps {
 }
 
 const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
-  const [isExpanded, SetExpended] = useState(false);
+  const [isExpanded, setExpended] = useState(false);
+  // const [rowNumber, setRowNumber] = useState(1);
   const [note, setNote] = useState({
     title: "",
     content: "",
@@ -41,34 +42,47 @@ const CreateArea: FunctionComponent<CreateAreaProps> = (props) => {
   }
 
   function expand() {
-    // console.log("hh");
+    // isExpanded ? setRowNumber(1) : setRowNumber(3);
+    setExpended(!isExpanded);
+    // console.log(isExpanded, rowNumber);
   }
 
   return (
     <div>
-      <form className="create-note">
-        <input
-          name="title"
-          onChange={handleChange}
-          onClick={expand}
-          value={note.title}
-          placeholder="Title"
-        />
-
-        <div>
+      <form className="create-note" onDoubleClick={expand}>
+        {isExpanded ? (
+          <>
+            {" "}
+            <input
+              name="title"
+              onChange={handleChange}
+              value={note.title}
+              placeholder="Title"
+            />
+            <textarea
+              name="content"
+              onChange={handleChange}
+              value={note.content}
+              placeholder="Take a note..."
+              rows={3}
+            />{" "}
+          </>
+        ) : (
           <textarea
             name="content"
             onChange={handleChange}
             value={note.content}
             placeholder="Take a note..."
-            rows={3}
+            onClick={expand}
+            rows={1}
           />
-          <Zoom in={isExpanded}>
-            <Fab color="primary" aria-label="add" onClick={submitNote}>
-              <AddIcon />
-            </Fab>
-          </Zoom>
-        </div>
+        )}
+
+        <Zoom in={isExpanded}>
+          <Fab color="primary" onClick={submitNote}>
+            <AddIcon />
+          </Fab>
+        </Zoom>
 
         {/* <button onClick={submitNote}>
           <AddIcon fontSize="large" />
